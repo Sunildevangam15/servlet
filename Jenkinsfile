@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        choice(name: 'STAGES_TO_RUN', choices: 'checkout,clean,compile,test,package', description: 'Enter the stages you want to run (comma-separated)')
+        choice(name: 'STAGES_TO_RUN', choices: 'checkout,clean,compile,package', description: 'Enter the stages you want to run (comma-separated)')
     }
 
     stages {
@@ -11,10 +11,11 @@ pipeline {
                 expression { params.STAGES_TO_RUN.contains('clone') }
             }
             steps {
-              git https://github.com/Sunildevangam15/servlet.git
+              git branch: 'master'
+                url: 'https://github.com/Sunildevangam15/servlet.git'
             }
         }
-        stage('Stage 2') {
+        stage('clean') {
             when {
                 expression { params.STAGES_TO_RUN.contains('Stage2') }
             }
@@ -22,7 +23,7 @@ pipeline {
                 echo 'Executing Stage 2'
             }
         }
-        stage('Stage 3') {
+        stage('compile') {
             when {
                 expression { params.STAGES_TO_RUN.contains('Stage3') }
             }
@@ -31,7 +32,7 @@ pipeline {
             }
         }
         // Repeat similarly for all 10 stages
-        stage('Stage 10') {
+        stage('package') {
             when {
                 expression { params.STAGES_TO_RUN.contains('Stage10') }
             }
