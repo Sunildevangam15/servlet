@@ -20,7 +20,7 @@ pipeline {
                 expression { params.STAGES_TO_RUN.contains('Stage2') }
             }
             steps {
-                echo 'Executing Stage 2'
+                sh 'mvn clean'
             }
         }
         stage('compile') {
@@ -28,7 +28,7 @@ pipeline {
                 expression { params.STAGES_TO_RUN.contains('Stage3') }
             }
             steps {
-                echo 'Executing Stage 3'
+                 sh 'mvn compile'
             }
         }
         // Repeat similarly for all 10 stages
@@ -37,7 +37,7 @@ pipeline {
                 expression { params.STAGES_TO_RUN.contains('Stage10') }
             }
             steps {
-                echo 'Executing Stage 10'
+                 sh 'mvn package'
             }
         }
     }
