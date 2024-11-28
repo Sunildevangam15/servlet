@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        choice(name: 'STAGES_TO_RUN', choices: 'checkout,clean,compile,package', description: 'Enter the stages you want to run (comma-separated)')
+        choice(name: 'STAGES_TO_RUN', choices: 'checkout,clean,compile,package', description: 'Enter the stages you want to run')
     }
 
     stages {
