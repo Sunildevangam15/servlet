@@ -11,7 +11,7 @@ pipeline {
                 expression { params.STAGES_TO_RUN.contains('clone') }
             }
             steps {
-              git branch: 'master'
+              git branch: 'master',
                 url: 'https://github.com/Sunildevangam15/servlet.git'
             }
         }
