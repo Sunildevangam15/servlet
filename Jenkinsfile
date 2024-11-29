@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     parameters {
-        choice(name: 'STAGES_TO_RUN', choices: 'checkout,clean,compile,package', description: 'Enter the stages you want to run')
+        choice(name: 'STAGES_TO_RUN', choices: 'checkout\nclean\ncompile\npackage')
     }
 
     stages {
         stage(' git checkout') {
             when {
-                expression { params.STAGES_TO_RUN.contains('clone') }
+                expression { params.STAGES_TO_RUN.contains('checkout') }
             }
             steps {
               git branch: 'master',
@@ -17,7 +17,7 @@ pipeline {
         }
         stage('clean') {
             when {
-                expression { params.STAGES_TO_RUN.contains('Stage2') }
+                expression { params.STAGES_TO_RUN.contains('clean') }
             }
             steps {
                 sh 'mvn clean'
@@ -25,7 +25,7 @@ pipeline {
         }
         stage('compile') {
             when {
-                expression { params.STAGES_TO_RUN.contains('Stage3') }
+                expression { params.STAGES_TO_RUN.contains('compile') }
             }
             steps {
                  sh 'mvn compile'
@@ -34,7 +34,7 @@ pipeline {
         // Repeat similarly for all 10 stages
         stage('package') {
             when {
-                expression { params.STAGES_TO_RUN.contains('Stage10') }
+                expression { params.STAGES_TO_RUN.contains('package') }
             }
             steps {
                  sh 'mvn package'
